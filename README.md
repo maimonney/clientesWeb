@@ -1,11 +1,11 @@
 # Clonar el repositor 
 
 1. Clono el repositorio
-    - git clone https://github.com/maimonney/claseshibridas.git
+    - git clone https://github.com/maimonney/clientesWeb.git
 
 2. Configuro el usuario & email
-    - git config user.name "maimonney"
-    - git config user.mail "maimonney30@gmail.com"
+    - git config user.name "dayayalaa"
+    - git config user.mail "daiana.ayala@davinci.edu.ar"
 
 3. Agrego los archivos, comento y realizo push
     - git add .
