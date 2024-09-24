@@ -5,7 +5,7 @@
 
 2. Configuro el usuario & email
     - git config user.name "dayayalaa"
-    - git config user.mail "daiana.ayala@davinci.edu.ar"
+    - git config user.mail "day1414@hotmail.com"
 
 3. Agrego los archivos, comento y realizo push
     - git add .
