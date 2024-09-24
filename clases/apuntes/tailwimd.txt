@@ -1,0 +1,37 @@
+# tailwind
+
+- Es un framework de CSS orientado en utilidades
+- Una clase de utilidad es una clase 
+- No genera una serie de clases predefinidas para elementos como botones o tablas
+
+## ¿Como instalarlo?
+
+link:
+https://tailwindcss.com/docs/installation/using-postcss
+
+Para incluir tailwind hay que seguir los siguientes pasos:
+1. Instalar dependecias_
+ - npm i -D tailwindcss postcss autoprefixer
+ - npm i --save-dev tailwindcss postcss autoprefixer
+
+2. Publicar os archivos de configuracion de tailwind y postcss:
+ - npx tailwindcss -p
+ - npx tailwindcss init
+ (npx - comando de ejecucion de paquetes de node)
+
+3. Tenemos que configurar cuales so los archivos del proyecto que tailwind debe "observar":
+
+
+4. Agregamos archivo CSS clases de tailwind a traves de susu directivas:
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+
+5. Instalar extencion Tailwind CSS
+Link: https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss
+
+Para que la directiva sea reconocida, se cambia abajo a la derecha CSS a Tailwind CSS
+
+# Estilos atributrarios []
+Para especificar el valor.
+Es util para poner estilos "one-off" de una unica vez
