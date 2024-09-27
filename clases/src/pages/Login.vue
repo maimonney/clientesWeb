@@ -1,29 +1,29 @@
 <script setup>
 import { ref } from 'vue';
-import BaseHeading1 from '../components/BaseHeading1.vue';
 import ButtonBase from '../components/ButtonBase.vue';
-import { login } from '../services/auth.js'; // Importa la función de login
+import BaseHeading1 from '../components/BaseHeading1.vue';
+import { login } from '../services/auth';
 import { useRouter } from 'vue-router'; // Importa el router
 
 const user = ref({
     email: '',
     password: '',
-}); 
-
-const loading = ref(false); 
+});
+const loading = ref(false);
 const router = useRouter(); // Instancia del router
 
 async function handleSubmit() {
-    loading.value = true; // Activa el estado de carga
+    loading.value = true;
+
     try {
-        await login(user.value); // Llama a la función de login
+        await login({...user.value});
         console.log('Inicio de sesión exitoso:', user.value);
         router.push('/'); // Redirige a la página principal después de iniciar sesión
     } catch (error) {
-        console.error('Error al iniciar sesión:', error);
+        console.error("[Login handleSubmit] Error al autenticar:", error);
         alert('Error al iniciar sesión: ' + error.message); // Muestra un mensaje al usuario
     } finally {
-        loading.value = false; // Desactiva el estado de carga
+        loading.value = false;
     }
 }
 </script>
@@ -31,14 +31,15 @@ async function handleSubmit() {
 <template>
   <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-      <img class="mx-auto h-10 w-auto" src="/public/img/logo_viaje.png" alt="Your Company">
-      <BaseHeading1>Ingresar a tu Cuenta</BaseHeading1>
+      <img class="mx-auto h-10 w-auto" src="/public/img/logo_viaje.png" alt="Logo de viaje de Arcana">
+      
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <BaseHeading1>Ingresar a tu Cuenta</BaseHeading1>
       <form class="space-y-6" @submit.prevent="handleSubmit">
         <div>
-          <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+          <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
           <div class="mt-2">
             <input
               id="email"
@@ -53,10 +54,8 @@ async function handleSubmit() {
 
         <div>
           <div class="flex items-center justify-between">
-            <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
-            <div class="text-sm">
-              <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
-            </div>
+            <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Contraseña</label>
+            
           </div>
           <div class="mt-2">
             <input
@@ -70,7 +69,7 @@ async function handleSubmit() {
           </div>
         </div>
         
-        <ButtonBase>Iniciar Sesión</ButtonBase>
+        <ButtonBase :loading="loading">Iniciar Sesión</ButtonBase>
       </form>
     </div>
   </div>

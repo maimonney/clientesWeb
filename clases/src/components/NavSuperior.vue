@@ -52,7 +52,7 @@ const handleSignOut = () => {
       <li><router-link class="block py-1 px-2" to="/agregar-publicacion">Agregar Publicación</router-link></li>
       <li><router-link class="block py-1 px-2" to="/perfil">Perfil</router-link></li>
       <template v-if="loggerUser.id !== null">
-        <li><router-link class="block py-1 px-2" to="/chat">Chat</router-link></li>
+
         <li><router-link class="block py-1 px-2" to="/perfil">Mi perfil</router-link></li>
         <li>
           <form action="#">
