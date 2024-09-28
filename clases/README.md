@@ -1,7 +1,7 @@
-# Clonar repositorio
-1. Clono el repositorio
-    - git clone git clone https://github.com/maimonney/clientesWeb.git
+# Clonar el repositor 
 
+1. Clono el repositorio
+    - git clone https://github.com/maimonney/clientesWeb.git
 
 2. Configuro el usuario & email
     - git config user.name "dayayalaa"
@@ -10,14 +10,12 @@
 3. Agrego los archivos, comento y realizo push
     - git add .
     - git commit -m "Agregar comentario"
-    - git push 
+    -git push 
 
 4. Para obtener los últimos cambios del repositorio
     - git pull
 
 
-
------------------------- 
-# Vincular FireBase
-
+--------------------- 
+# Conectar firebase 
 - npm install firebase
