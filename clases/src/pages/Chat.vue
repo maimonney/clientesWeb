@@ -11,8 +11,7 @@ const newMessage = ref({
     text: '',
 });
 
-// Tan pronto se carga el componente, queremos leer los mensajes de
-// Firestore.
+
 onMounted(async () => {
     subscribeToPublicChatMessages(newMessages => messages.value = newMessages);
 });
