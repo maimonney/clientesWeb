@@ -18,3 +18,8 @@ export const db = getFirestore(app);
 export const auth = getAuth(app);
 
 
+
+
+const userId = auth.currentUser?.uid; // Obtén el ID del usuario autenticado
+
+

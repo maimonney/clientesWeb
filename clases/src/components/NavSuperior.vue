@@ -1,19 +1,20 @@
 <script setup>
 import { onMounted, ref } from 'vue';
-import { logout, subscribeToAuthChanges } from '../services/auth'; // Corrige typo en 'subscribe'
+import { logout, subscribeToAuthChanges } from '../services/auth'; // Asegúrate de que el nombre sea correcto
 
 const loggedUser = ref({
     id: null,
     email: null,
 });
 
+// Suscribirse a los cambios de autenticación
 onMounted(() => {
     subscribeToAuthChanges(newUserData => loggedUser.value = newUserData);
 });
 
 const handleLogout = async () => {
     try {
-        await logout(); // Esperar a que la función logout se ejecute correctamente
+        await logout();
         console.log("Sesión cerrada correctamente");
     } catch (error) {
         console.error("[Navbar handleLogout] Error al cerrar sesión:", error);
@@ -32,6 +33,7 @@ const handleLogout = async () => {
             <template v-if="loggedUser.id !== null">
                 <li><router-link class="block py-1 px-2" to="/chat">Chat</router-link></li>
                 <li><router-link class="block py-1 px-2" to="/mi-perfil">Mi Perfil</router-link></li>
+                <li><router-link class="block py-1 px-2" to="/publicaciones">Publicaciones</router-link></li> <!-- Enlace a publicaciones -->
                 <li>
                     <form action="#" @submit.prevent="handleLogout">
                         <button type="submit">{{ loggedUser.email }} (Cerrar Sesión)</button>

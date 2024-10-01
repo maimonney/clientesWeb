@@ -1,5 +1,9 @@
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, updateProfile, signOut } from "firebase/auth"; // Agregado createUserWithEmailAndPassword
-import { auth } from "./firebase"; 
+import { signInWithEmailAndPassword, updateProfile, signOut } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase";
+import { updateUserProfile } from "./userPerfil";
+
+
 
 let loggedUser = {
     id: null,
@@ -8,6 +12,7 @@ let loggedUser = {
 };
 
 let observers = [];
+
 onAuthStateChanged(auth, user => {
     if (user) {
         loggedUser = {
@@ -22,6 +27,7 @@ onAuthStateChanged(auth, user => {
             displayName: null,
         };
     }
+
     notifyAll();
 });
 
@@ -35,13 +41,12 @@ export async function login({ email, password }) {
     }
 }
 
-/**
- * @param {{displayName: string, bio: string, career: string}} data
- * @returns {Promise<null>}
- */
 export async function editMyProfile({ displayName, bio, career }) {
     try {
         await updateProfile(auth.currentUser, { displayName });
+
+        await updateUserProfile(loggedUser.id, { displayName, bio, career }); 
+
         loggedUser = {
             ...loggedUser,
             displayName,
@@ -57,17 +62,11 @@ export async function logout() {
     await signOut(auth);
 }
 
-/**
- * @param {function} callback
- */
 export function subscribeToAuthChanges(callback) {
     observers.push(callback);
     notify(callback);
 }
 
-/**
- * @param {function} callback
- */
 function notify(callback) {
     callback({ ...loggedUser });
 }
@@ -76,16 +75,11 @@ function notifyAll() {
     observers.forEach(callback => notify(callback));
 }
 
-/**
- * Función para registrar un nuevo usuario.
- * @param {{email: string, password: string}} userData
- * @returns {Promise<firebase.User>}
- */
 export async function registroUser({ email, password }) {
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         console.log("Usuario registrado con éxito: ", userCredential.user);
-        return userCredential.user; // Devuelve el usuario registrado (opcional)
+        return userCredential.user; 
     } catch (error) {
         console.error("[auth.js registro] Error al registrar el usuario: ", error);
         throw error;
