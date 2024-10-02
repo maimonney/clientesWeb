@@ -16,9 +16,10 @@ export default {
       height: {
         '25': '6.25rem',
       },
-      gridTemplateRows: {
-        'layout': '64px 1fr 100px',
-      }
+      gridTemplateColumns: {
+        'layout': '300px 1fr 400px',
+      },
+
     },
   },
   plugins: [],

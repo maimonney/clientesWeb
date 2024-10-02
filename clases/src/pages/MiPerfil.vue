@@ -2,8 +2,9 @@
 import { ref, onMounted } from 'vue';
 import BaseHeading1 from '../components/BaseHeading1.vue';
 import { getUserProfileById } from '../services/userPerfil';
-import { getPublicacionesByUserId } from '../services/postUser'; // Asegúrate de importar esta función
+import { getPublicacionesByUserId } from '../services/postUser'; 
 import { getAuth } from 'firebase/auth';
+import IconEdit from '../components/icons/IconEdit.vue';
 
 const loggedUser = ref({
     id: null,
@@ -72,9 +73,8 @@ const formatDate = (timestamp) => {
             <BaseHeading1>Mi Perfil</BaseHeading1>
             <RouterLink 
               to="/mi-perfil/editar" 
-              class="text-indigo-600 hover:text-indigo-800 font-semibold"
-            >
-              Editar
+              class="text-indigo-600 hover:text-indigo-800 font-semibold">
+             <IconEdit />
             </RouterLink>
         </div>
 

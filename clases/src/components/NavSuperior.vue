@@ -1,13 +1,16 @@
 <script setup>
 import { onMounted, ref } from 'vue';
-import { logout, subscribeToAuthChanges } from '../services/auth'; // Asegúrate de que el nombre sea correcto
+import { logout, subscribeToAuthChanges } from '../services/auth'; 
+import IconHome from '../components/icons/IconHome.vue';
+import IconPerfil from '../components/icons/IconPerfil.vue';
+import IconPublicar from '../components/icons/IconPublicar.vue';
+import IconCerrarSesion from '../components/icons/IconCerrarSesion.vue'; // Corregir ruta
 
 const loggedUser = ref({
     id: null,
     email: null,
 });
 
-// Suscribirse a los cambios de autenticación
 onMounted(() => {
     subscribeToAuthChanges(newUserData => loggedUser.value = newUserData);
 });
@@ -23,27 +26,66 @@ const handleLogout = async () => {
 </script>
 
 <template>
-    <nav class="flex justify-between items-center p-4 bg-slate-200 text-slate-800">
-        <router-link to="/" class="text-xl">
-            <img src="/img/logo_viaje.png" alt="Logo Viaje" class="h-10 w-auto">
-        </router-link>
+    <div class="h-screen w-64 bg-slate-800 text-white flex flex-col">
+        <!-- Logo -->
+        <div class="p-4 bg-slate-900 flex justify-center">
+            <router-link to="/" class="text-xl">
+                <img src="/img/logo_viaje.png" alt="Logo Viaje" class="h-10 w-auto">
+            </router-link>
+        </div>
 
-        <ul class="flex gap-4 items-center">
-            <li><router-link class="block py-1 px-2" to="/">Home</router-link></li>
+        <!-- Menú de navegación -->
+        <ul class="flex-1 p-4 space-y-4">
+            <!-- Enlace Home (solo visible si está logueado) -->
             <template v-if="loggedUser.id !== null">
-                <li><router-link class="block py-1 px-2" to="/chat">Chat</router-link></li>
-                <li><router-link class="block py-1 px-2" to="/mi-perfil">Mi Perfil</router-link></li>
-                <li><router-link class="block py-1 px-2" to="/publicaciones">Publicaciones</router-link></li> <!-- Enlace a publicaciones -->
                 <li>
-                    <form action="#" @submit.prevent="handleLogout">
-                        <button type="submit">{{ loggedUser.email }} (Cerrar Sesión)</button>
-                    </form>
+                    <router-link class="flex items-center gap-2 py-2 px-4 hover:bg-slate-700 rounded transition-colors" to="/">
+                        <IconHome class="h-6 w-6" /> 
+                        <span>Home</span>
+                    </router-link>
+                </li>
+            </template>
+            
+            <template v-if="loggedUser.id !== null">
+                <!-- Enlace Mi Perfil -->
+                <li>
+                    <router-link class="flex items-center gap-2 py-2 px-4 hover:bg-slate-700 rounded transition-colors" to="/mi-perfil">
+                        <IconPerfil class="h-6 w-6" /> 
+                        <span>Mi perfil</span>
+                    </router-link>
+                </li>
+                <!-- Enlace Publicar -->
+                <li>
+                    <router-link class="flex items-center gap-2 py-2 px-4 hover:bg-slate-700 rounded transition-colors" to="/publicaciones">
+                        <IconPublicar class="h-6 w-6" /> 
+                        <span>Publicar</span>
+                    </router-link>
                 </li>
             </template>
             <template v-else>
-                <li><router-link class="block py-1 px-2" to="/registrarse">Crear Cuenta</router-link></li>
-                <li><router-link class="block py-1 px-2" to="/iniciar-sesion">Iniciar Sesión</router-link></li>
+                <!-- Enlace Crear Cuenta -->
+                <li>
+                    <router-link class="flex items-center gap-2 py-2 px-4 hover:bg-slate-700 rounded transition-colors" to="/registrarse">
+                        Crear Cuenta
+                    </router-link>
+                </li>
+                <!-- Enlace Iniciar Sesión -->
+                <li>
+                    <router-link class="flex items-center gap-2 py-2 px-4 hover:bg-slate-700 rounded transition-colors" to="/iniciar-sesion">
+                        Iniciar Sesión
+                    </router-link>
+                </li>
             </template>
         </ul>
-    </nav>
+
+        <!-- Botón Cerrar Sesión al final -->
+        <div class="p-4 mt-auto">
+            <form action="#" @submit.prevent="handleLogout">
+                <button type="submit" class="flex items-center gap-2 py-2 px-4 hover:bg-slate-700 rounded transition-colors w-full text-left">
+                    <span>{{ loggedUser.email }}</span>
+                    <IconCerrarSesion class="h-6 w-6" />
+                </button>
+            </form>
+        </div>
+    </div>
 </template>

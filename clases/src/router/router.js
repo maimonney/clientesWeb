@@ -1,6 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import Home from '../pages/Home.vue';
-import Chat from '../pages/Chat.vue';
 import LoginUser from '../pages/LoginUser.vue';
 import RegistroUser from '../pages/RegistroUser.vue';
 import MiPerfil from '../pages/MiPerfil.vue';
@@ -9,7 +8,6 @@ import PostUser from '../pages/PostUser.vue'; // Asegúrate de importar el compo
 
 const routes = [
     { path: '/',                 component: Home },
-    { path: '/chat',             component: Chat },
     { path: '/iniciar-sesion',   component: LoginUser },
     { path: '/registrarse',      component: RegistroUser },
     { path: '/mi-perfil',        component: MiPerfil },

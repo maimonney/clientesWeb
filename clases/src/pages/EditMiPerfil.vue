@@ -6,6 +6,7 @@ import ButtonBase from '../components/ButtonBase.vue';
 import { editMyProfile } from '../services/auth'; 
 import { getAuth, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from 'firebase/auth'; 
 
+
 const loading = ref(false);
 const auth = getAuth();
 const user = auth.currentUser;
@@ -74,7 +75,7 @@ const handleSubmit = async () => {
 
 <template>
     <div class="p-6 max-w-md mx-auto bg-white rounded-lg shadow-md">
-        <BaseHeading1 class="text-center mb-4">Editar Perfil</BaseHeading1>
+        <BaseHeading1 class="text-center mb-4"> Editar mi perfil </BaseHeading1>
 
         <form @submit.prevent="handleSubmit">
             <div class="mb-4">
