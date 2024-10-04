@@ -15,11 +15,12 @@ onMounted(() => {
     subscribeToAuthChanges(newUserData => {
         loggedUser.value = newUserData;
 
-        // Redirecciona si el usuario no está logueado
-        if (newUserData.id) {
-            router.push('/');
-        } 
 
+        if (!newUserData.id) {
+            router.push('/iniciar-sesion'); 
+        } else {
+            router.push('/'); 
+        }
     });
 });
 </script>
@@ -34,7 +35,7 @@ onMounted(() => {
       </div>
     </nav>
 
-   
+    <!-- Vista para cuando el usuario no está logueado -->
     <div v-if="!loggedUser.id">
       <router-view />
     </div>

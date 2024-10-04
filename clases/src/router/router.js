@@ -4,7 +4,7 @@ import LoginUser from '../pages/LoginUser.vue';
 import RegistroUser from '../pages/RegistroUser.vue';
 import MiPerfil from '../pages/MiPerfil.vue';
 import EditMiPerfil from '../pages/EditMiPerfil.vue';
-import PostUser from '../pages/PostUser.vue'; // Asegúrate de importar el componente de publicaciones
+import PostUser from '../pages/PostUser.vue'; 
 
 const routes = [
     { path: '/',                 component: Home },
@@ -12,12 +12,12 @@ const routes = [
     { path: '/registrarse',      component: RegistroUser },
     { path: '/mi-perfil',        component: MiPerfil },
     { path: '/mi-perfil/editar', component: EditMiPerfil },
-    { path: '/publicaciones',    component: PostUser }, // Nueva ruta para el componente de publicaciones
+    { path: '/publicaciones',    component: PostUser }, 
 ];
 
 const router = createRouter({
     routes,
-    history: createWebHashHistory(), // Cambia a createWebHistory si no deseas usar hashes
+    history: createWebHashHistory(), 
 });
 
 export default router;

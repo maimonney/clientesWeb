@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import ButtonBase from '../components/ButtonBase.vue';
 import Baseh2 from '../components/Baseh2.vue';
 import IconTravel from '../components/icons/IconTravel.vue';
-
+import { registroUser } from '../services/auth'; // Asegúrate de ajustar esta ruta
 
 const user = ref({
     email: '',
@@ -18,6 +18,7 @@ async function handleSubmit() {
 
     try {
         await registroUser({ ...user.value }); 
+        // Aquí puedes redirigir al usuario o mostrar un mensaje de éxito
     } catch (error) {
         console.error("[Register handleSubmit] Error al registrar: ", error); 
         if (error.code === 'auth/email-already-in-use') {
@@ -34,13 +35,12 @@ const iconColor = ref('#115e59');
 </script>
 
 <template>
-    <!-- Contenedor principal con la imagen de fondo -->
     <div class="flex h-screen justify-center items-center px-6 py-12 lg:px-8 bg-[url('/img/fondoRegistro.jpg')] bg-cover bg-center">
         
         <div class="backdrop-blur-sm bg-white/70 border border-gray-300 rounded-lg shadow-lg p-6 w-full max-w-sm">
             <div class="text-center mb-6 flex flex-col items-center">
                 <IconTravel :fillColor="iconColor" />                
- <Baseh2 class="text-gray-900">Registrar Usuario</Baseh2>
+                <Baseh2 class="text-gray-900">Registrar Usuario</Baseh2>
             </div>
             
             <form class="space-y-6" action="#" @submit.prevent="handleSubmit">
@@ -59,6 +59,7 @@ const iconColor = ref('#115e59');
                             v-model="user.email"
                             class="peer py-3 px-4 ps-11 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                             placeholder="Tu@mail.com"
+                            required
                         />
                         <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none ps-4">
                             <svg class="shrink-0 w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -78,6 +79,7 @@ const iconColor = ref('#115e59');
                         v-model="user.password"
                         class="peer py-3 px-4 ps-11 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                         placeholder="Enter password"
+                        required
                     />
                     <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none ps-4">
                         <svg class="shrink-0 w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -88,7 +90,7 @@ const iconColor = ref('#115e59');
                 </div>
 
                 <div>
-                    <ButtonBase type="submit">Registrarse</ButtonBase>
+                    <ButtonBase type="submit" :disabled="loading">{{ loading ? 'Cargando...' : 'Registrarse' }}</ButtonBase>
                 </div>
             </form>
         </div>

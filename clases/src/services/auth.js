@@ -1,9 +1,7 @@
-import { signInWithEmailAndPassword, updateProfile, signOut } from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signOut } from "firebase/auth"; 
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import { updateUserProfile } from "./userPerfil";
-
-
 
 let loggedUser = {
     id: null,
@@ -41,6 +39,18 @@ export async function login({ email, password }) {
     }
 }
 
+// Aquí es donde agregas la función de registro de usuario
+export async function registroUser({ email, password }) {
+    try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        console.log("Usuario registrado:", userCredential);
+        return userCredential; // Devuelve el usuario registrado
+    } catch (error) {
+        console.error("[auth.js registroUser] Error al registrar el usuario:", error);
+        throw error; // Lanza el error para manejarlo en la llamada
+    }
+}
+
 export async function editMyProfile({ displayName, bio, career }) {
     try {
         await updateProfile(auth.currentUser, { displayName });
@@ -74,4 +84,3 @@ function notify(callback) {
 function notifyAll() {
     observers.forEach(callback => notify(callback));
 }
-
