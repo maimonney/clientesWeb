@@ -1,9 +1,9 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import BaseHeading1 from '../components/BaseHeading1.vue';
 import { getUserProfileById } from '../services/userPerfil';
 import { getPublicacionesByUserId } from '../services/postUser'; 
 import { getAuth } from 'firebase/auth';
+import BaseHeading1 from '../components/BaseHeading1.vue';
 import IconEdit from '../components/icons/IconEdit.vue';
 import ToBack from '../components/ToBack.vue';
 
@@ -69,8 +69,9 @@ const formatDate = (timestamp) => {
 </script>
 
 <template>
-   <ToBack />
-   <div class="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+  
+   <div class="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg"> 
+    <ToBack />
         <div class="flex items-center justify-between mb-6">
             <div class="flex items-center">
                 <img class="inline-block w-[46px] h-[46px] rounded-full mr-2" 

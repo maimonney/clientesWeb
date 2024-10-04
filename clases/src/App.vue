@@ -40,9 +40,9 @@ onMounted(() => {
     </div>
 
     <!-- Si el usuario está logueado, mostramos el nav lateral y el contenido de las rutas -->
-    <div v-else class="flex">
+    <div v-else>
       <NavLateral :loggedUser="loggedUser" />
-      <div class="flex-1 p-6">
+      <div class="ml-4 sm:ml-12 md:ml-64 p-4">
         <router-view />
       </div>
     </div>

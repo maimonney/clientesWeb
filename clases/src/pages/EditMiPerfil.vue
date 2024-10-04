@@ -46,8 +46,9 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-    <ToBack />
+    
     <div class="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+        <ToBack />
         <BaseHeading1 class="text-center mb-4"> Editar mi perfil </BaseHeading1>
 
         <form @submit.prevent="handleSubmit">
@@ -56,7 +57,7 @@ const handleSubmit = async () => {
                 <input
                     type="text"
                     id="bio"
-                    class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-500"
+                    class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-[#047857]"
                     v-model="editData.bio"
                 />
             </div>
@@ -65,7 +66,7 @@ const handleSubmit = async () => {
                 <input
                     type="text"
                     id="displayName"
-                    class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-500"
+                    class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-[#047857]"
                     v-model="editData.displayName"
                     autocomplete="username"
                 />
@@ -75,7 +76,7 @@ const handleSubmit = async () => {
                 <input
                     type="text"
                     id="career"
-                    class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-500"
+                    class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-[#047857]"
                     v-model="editData.career"
                 />
             </div>

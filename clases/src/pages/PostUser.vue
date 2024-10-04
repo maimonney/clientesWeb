@@ -5,6 +5,7 @@ import { guardarComentario, suscribirseComentarios } from '../services/comentUse
 import { auth } from '../services/firebase'; 
 import ToBack from '../components/ToBack.vue';
 import Baseh2 from '../components/Baseh2.vue';
+import ButtonBase from '../components/ButtonBase.vue';
 
 const publicaciones = ref([]);
 const nuevaPublicacion = ref({ texto: '' });
@@ -50,26 +51,27 @@ const formatDate = (timestamp) => {
 </script>
 
 <template>
-    <ToBack />
+    
     <div class="max-w-3xl mx-auto p-6 bg-gray-50 shadow-lg rounded-lg space-y-6">
-        <Baseh2 class="text-center text-2xl font-bold text-indigo-700">Publicaciones</Baseh2>
+        <ToBack />
+        <Baseh2 class="text-center text-2xl font-bold text-[#115e59]">Publicaciones</Baseh2>
 
         <form @submit.prevent="agregarPublicacion" class="flex flex-col space-y-4">
             <input 
                 v-model="nuevaPublicacion.texto" 
                 placeholder="¿Qué quieres compartir hoy?" 
-                class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#047857] "
             />
             <button 
                 type="submit" 
-                class="self-end px-6 py-3 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition duration-200 shadow">
+                class="self-end px-6 py-3 bg-[#115e59] text-white rounded-lg hover:bg-[#047857] transition duration-200 shadow">
                 Publicar
             </button>
         </form>
         
         <div v-for="publicacion in publicaciones" :key="publicacion.id" class="p-6 border border-gray-200 rounded-lg bg-white shadow-sm">
             <div class="flex justify-between items-center mb-4">
-                <strong class="text-indigo-600 text-lg">{{ publicacion.email }}</strong>
+                <strong class="text-[#115e59] text-lg">{{ publicacion.email }}</strong>
                 <span class="text-gray-500 text-sm">{{ formatDate(publicacion.created_at) }}</span>
             </div>
             <p class="text-gray-700 mb-4">{{ publicacion.texto }}</p>
@@ -87,13 +89,14 @@ const formatDate = (timestamp) => {
                 <input 
                     v-model="nuevoComentario[publicacion.id]" 
                     placeholder="Escribe un comentario" 
-                    class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#047857] "
                 />
-                <button 
+                <ButtonBase><button 
                     type="submit" 
-                    class="self-end px-6 py-3 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition duration-200 shadow">
+                    class="self-end px-6 py-3 text-white  transition duration-200 ">
                     Comentar
-                </button>
+                </button></ButtonBase>
+                
             </form>
         </div>
     </div>
