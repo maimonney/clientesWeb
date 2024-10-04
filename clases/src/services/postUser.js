@@ -39,7 +39,9 @@ export const suscribirsePublicaciones = (callback) => {
  */
 export const getPublicacionesByUserId = async (userId) => {
     const publicacionesRef = collection(db, 'publicaciones');
-    const q = query(publicacionesRef, where('userId', '==', userId), orderBy('created_at', 'desc'));
+    const q = query(publicacionesRef, where('userId', '==', userId));
+
+    console.log("User ID:", userId);
 
     const querySnapshot = await getDocs(q);
     const publicaciones = [];

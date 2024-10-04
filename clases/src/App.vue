@@ -14,6 +14,12 @@ const router = useRouter();
 onMounted(() => {
     subscribeToAuthChanges(newUserData => {
         loggedUser.value = newUserData;
+
+        // Redirecciona si el usuario no está logueado
+        if (newUserData.id) {
+            router.push('/');
+        } 
+
     });
 });
 </script>
@@ -28,7 +34,7 @@ onMounted(() => {
       </div>
     </nav>
 
-    <!-- Si el usuario no está logueado, mostramos el formulario de login o registro -->
+   
     <div v-if="!loggedUser.id">
       <router-view />
     </div>

@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import ButtonBase from '../components/ButtonBase.vue';
 import Baseh2 from '../components/Baseh2.vue';
+import IconTravel from '../components/icons/IconTravel.vue';
 
 
 const user = ref({
@@ -28,6 +29,8 @@ async function handleSubmit() {
 
     loading.value = false;
 }
+
+const iconColor = ref('#115e59');
 </script>
 
 <template>
@@ -35,9 +38,9 @@ async function handleSubmit() {
     <div class="flex h-screen justify-center items-center px-6 py-12 lg:px-8 bg-[url('/img/fondoRegistro.jpg')] bg-cover bg-center">
         
         <div class="backdrop-blur-sm bg-white/70 border border-gray-300 rounded-lg shadow-lg p-6 w-full max-w-sm">
-            <div class="text-center mb-6">
-                <img class="mx-auto h-10 w-auto" src="/img/logo_viaje.png" alt="Logo de la empresa de viaje de Arcana">
-                <Baseh2 class="text-gray-900">Registrar Usuario</Baseh2>
+            <div class="text-center mb-6 flex flex-col items-center">
+                <IconTravel :fillColor="iconColor" />                
+ <Baseh2 class="text-gray-900">Registrar Usuario</Baseh2>
             </div>
             
             <form class="space-y-6" action="#" @submit.prevent="handleSubmit">

@@ -121,7 +121,7 @@ const formatDate = (timestamp) => {
 
         <div class="bg-white shadow-md rounded-lg p-6">
             <h2 class="text-xl font-bold mb-4">Mis Publicaciones</h2>
-            <div v-if="loggedUser.publicaciones.length === 0" class="text-gray-500">
+            <div v-if="loggedUser.publicaciones?.length === 0" class="text-gray-500">
                 No has realizado ninguna publicación.
             </div>
             <div v-for="publicacion in loggedUser.publicaciones" :key="publicacion.id" class="mb-4 p-4 border border-gray-300 rounded-lg bg-gray-50">

@@ -4,7 +4,8 @@ import { logout, subscribeToAuthChanges } from '../services/auth';
 import IconHome from '../components/icons/IconHome.vue';
 import IconPerfil from '../components/icons/IconPerfil.vue';
 import IconPublicar from '../components/icons/IconPublicar.vue';
-import IconCerrarSesion from '../components/icons/IconCerrarSesion.vue'; // Corregir ruta
+import IconCerrarSesion from '../components/icons/IconCerrarSesion.vue'; 
+import IconTravel from './icons/IconTravel.vue';
 
 // Prop para recibir el estado del usuario
 const props = defineProps({
@@ -23,6 +24,7 @@ onMounted(() => {
 const handleLogout = async () => {
     try {
         await logout();
+        router.push('/iniciar-sesion');
         console.log("Sesión cerrada correctamente");
     } catch (error) {
         console.error("[Navbar handleLogout] Error al cerrar sesión:", error);
@@ -31,11 +33,11 @@ const handleLogout = async () => {
 </script>
 
 <template>
-    <div class="h-screen w-64 bg-slate-800 text-white flex flex-col fixed">
+    <div class="h-screen w-64 bg-[#115e59] text-white flex flex-col fixed">
         <!-- Logo -->
-        <div class="p-4 bg-slate-900 flex justify-center">
+        <div class="p-4 bg-[#134e4a] flex justify-center">
             <router-link to="/" class="text-xl">
-                <img src="/img/logo_viaje.png" alt="Logo Viaje" class="h-10 w-auto">
+                <IconTravel />
             </router-link>
         </div>
 
@@ -44,7 +46,7 @@ const handleLogout = async () => {
             <!-- Enlace Home (solo visible si está logueado) -->
             <template v-if="loggedUser.id !== null">
                 <li>
-                    <router-link class="flex items-center gap-2 py-2 px-4 hover:bg-slate-700 rounded transition-colors" to="/">
+                    <router-link class="flex items-center gap-2 py-2 px-4 hover:bg-[slate-700] rounded transition-colors" to="/">
                         <IconHome class="h-6 w-6" /> 
                         <span>Home</span>
                     </router-link>
