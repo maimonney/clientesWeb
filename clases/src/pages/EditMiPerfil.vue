@@ -14,8 +14,8 @@ const router = useRouter();
 
 const editData = ref({
     displayName: user?.displayName || '',
-    bio: '',
-    career: '',
+    bio: user?.bio || '', 
+    career: user?.career || '', 
 });
 
 const error = ref(null); 

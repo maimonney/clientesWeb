@@ -78,7 +78,7 @@ const handleLogout = async () => {
                 <button type="submit"
                     class="flex items-center gap-2 py-2 px-4 hover:bg-slate-700 rounded transition-colors w-full text-left">
                     <IconCerrarSesion class="h-6 w-6" />
-                    <span class="hidden md:inline">{{ loggedUser.email }}</span>
+                    <span class="hidden md:inline">{{ loggedUser.displayName }}</span>
                 </button>
             </form>
         </div>

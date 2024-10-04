@@ -32,15 +32,22 @@ const loadUserProfile = async () => {
     }
 
     const userId = user.uid; 
+    console.log('Cargando perfil para el usuario:', userId); 
 
     try {
         const profile = await getUserProfileById(userId); 
+        if (!profile) {
+            console.error('No se encontró perfil para el ID proporcionado.');
+            return;
+        }
         loggedUser.value = profile; 
         await loadUserPublications(); 
     } catch (error) {
         console.error('[MiPerfil] Error al obtener el perfil del usuario:', error);
     }
 };
+
+
 
 
 const loadUserPublications = async () => {
@@ -77,7 +84,7 @@ const formatDate = (timestamp) => {
                 <img class="inline-block w-[46px] h-[46px] rounded-full mr-2" 
                      src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80" 
                      alt="Avatar">
-                <BaseHeading1 >   Mi Perfil</BaseHeading1>
+                <BaseHeading1 >Mi Perfil</BaseHeading1>
             </div>
             <RouterLink 
               to="/mi-perfil/editar" 
@@ -88,7 +95,7 @@ const formatDate = (timestamp) => {
 
         <div class="mb-8 p-4 bg-white shadow-md rounded-lg">
             <p class="text-gray-700 text-base">
-                {{ loggedUser.bio || "Aca va la bio" }}
+                {{ loggedUser.bio || "Por favor ingrese una biografía" }}
             </p>
         </div>
 
