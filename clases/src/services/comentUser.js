@@ -1,4 +1,4 @@
-import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, onSnapshot, serverTimestamp } from "firebase/firestore";
 import { db } from "./firebase";
 
 /**

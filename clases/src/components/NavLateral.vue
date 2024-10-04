@@ -1,18 +1,23 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted } from 'vue';
 import { logout, subscribeToAuthChanges } from '../services/auth'; 
 import IconHome from '../components/icons/IconHome.vue';
 import IconPerfil from '../components/icons/IconPerfil.vue';
 import IconPublicar from '../components/icons/IconPublicar.vue';
 import IconCerrarSesion from '../components/icons/IconCerrarSesion.vue'; // Corregir ruta
 
-const loggedUser = ref({
-    id: null,
-    email: null,
+// Prop para recibir el estado del usuario
+const props = defineProps({
+    loggedUser: {
+        type: Object,
+        required: true,
+    },
 });
 
 onMounted(() => {
-    subscribeToAuthChanges(newUserData => loggedUser.value = newUserData);
+    subscribeToAuthChanges(newUserData => {
+
+    });
 });
 
 const handleLogout = async () => {
@@ -26,7 +31,7 @@ const handleLogout = async () => {
 </script>
 
 <template>
-    <div class="h-screen w-64 bg-slate-800 text-white flex flex-col">
+    <div class="h-screen w-64 bg-slate-800 text-white flex flex-col fixed">
         <!-- Logo -->
         <div class="p-4 bg-slate-900 flex justify-center">
             <router-link to="/" class="text-xl">
@@ -44,9 +49,6 @@ const handleLogout = async () => {
                         <span>Home</span>
                     </router-link>
                 </li>
-            </template>
-            
-            <template v-if="loggedUser.id !== null">
                 <!-- Enlace Mi Perfil -->
                 <li>
                     <router-link class="flex items-center gap-2 py-2 px-4 hover:bg-slate-700 rounded transition-colors" to="/mi-perfil">

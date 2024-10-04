@@ -1,8 +1,6 @@
-// userPerfil.js
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { db } from "./firebase"; // Verifica que esta importación también sea correcta
+import { db } from "./firebase"; 
 
-// Función para actualizar el perfil del usuario
 export async function updateUserProfile(id, { displayName, bio, career }) {
     const userRef = doc(db, 'users', id);
     try {
@@ -17,7 +15,6 @@ export async function updateUserProfile(id, { displayName, bio, career }) {
     }
 }
 
-// Función para obtener el perfil del usuario por ID
 export async function getUserProfileById(id) {
     const userRef = doc(db, 'users', id);
     const userSnapshot = await getDoc(userRef);

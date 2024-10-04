@@ -1,8 +1,7 @@
 import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp, where, getDocs } from "firebase/firestore";
 import { db } from "./firebase";
-import { getAuth } from "firebase/auth"; // Importa el módulo de autenticación de Firebase
-
-const auth = getAuth(); // Inicializa la autenticación
+import { getAuth } from "firebase/auth"; 
+const auth = getAuth(); 
 
 /**
  * @param {{email: string, texto: string}} nuevaPublicacion
@@ -14,7 +13,7 @@ export const guardarPublicacion = async ({ email, texto }) => {
         email,
         texto,
         created_at: serverTimestamp(),
-        userId: auth.currentUser.uid, // Guarda el userId del autor de la publicación
+        userId: auth.currentUser.uid, 
     });
 };
 
@@ -23,7 +22,7 @@ export const guardarPublicacion = async ({ email, texto }) => {
  */
 export const suscribirsePublicaciones = (callback) => {
     const publicacionesRef = collection(db, 'publicaciones');
-    const publicacionesQuery = query(publicacionesRef, orderBy('created_at'));
+    const publicacionesQuery = query(publicacionesRef, orderBy('created_at', 'desc'));
     
     return onSnapshot(publicacionesQuery, snapshot => {
         const publicaciones = snapshot.docs.map(doc => ({
@@ -40,7 +39,7 @@ export const suscribirsePublicaciones = (callback) => {
  */
 export const getPublicacionesByUserId = async (userId) => {
     const publicacionesRef = collection(db, 'publicaciones');
-    const q = query(publicacionesRef, where('userId', '==', userId));
+    const q = query(publicacionesRef, where('userId', '==', userId), orderBy('created_at', 'desc'));
 
     const querySnapshot = await getDocs(q);
     const publicaciones = [];

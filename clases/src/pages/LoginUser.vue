@@ -9,14 +9,17 @@ const user = ref({
     password: '',
 });
 const loading = ref(false);
+const errorMessage = ref('');
 
 async function handleSubmit() {
     loading.value = true;
+    errorMessage.value = '';
 
     try {
-        await login({...user.value});
+        await login({ ...user.value });
     } catch (error) {
         console.error("[Login handleSubmit] Error al autenticar: ", error);
+        errorMessage.value = "Ocurrió un error al intentar iniciar sesión. Intenta nuevamente.";
     }
 
     loading.value = false;
@@ -24,35 +27,53 @@ async function handleSubmit() {
 </script>
 
 <template>
-    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-            <img class="mx-auto h-10 w-auto" src="/img/logo_viaje.png" alt="Logo de la empresa de viaje de Arcana">
-            <Baseh2>Iniciar Sesión</Baseh2>
-        </div>
+    <!-- Contenedor principal con la imagen de fondo -->
+    <div class="flex h-screen justify-center items-center px-6 py-12 lg:px-8 bg-[url('/img/fondoLogin.jpg')] bg-cover bg-center">
+        <div class="backdrop-blur-sm bg-white/70 border border-gray-300 rounded-lg shadow-lg p-6 w-full max-w-sm">
+            <div class="text-center mb-6">
+                <img class="mx-auto h-10 w-auto" src="/img/logo_viaje.png" alt="Logo de la empresa de viaje de Arcana">
+                <Baseh2 class="text-gray-900">Iniciar Sesión</Baseh2>
+            </div>
 
-        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <form class="space-y-6" action="#" @submit.prevent="handleSubmit">
-                <div>
-                    <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
-                    <div class="mt-2">
-                        <input id="email" 
-                               name="email" 
-                               type="email" 
-                               autocomplete="email"
-                               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                               v-model="user.email">
+                <!-- Mensaje de error -->
+                <div v-if="errorMessage" class="text-red-600 bg-red-100 border border-red-400 rounded-lg p-3">
+                    {{ errorMessage }}
+                </div>
+
+                <!-- Input de Email -->
+                <div class="max-w-sm space-y-3">
+                    <div class="relative">
+                        <input
+                            type="email"
+                            v-model="user.email"
+                            autocomplete="email"
+                            class="peer py-3 px-4 ps-11 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                            placeholder="Tu@mail.com"
+                        />
+                        <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none ps-4">
+                            <svg class="shrink-0 w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
                     </div>
                 </div>
 
-                <div>
-                    <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
-                    <div class="mt-2">
-                        <input id="password" 
-                               name="password"
-                               type="password"
-                               autocomplete="current-password" 
-                               v-model="user.password"
-                               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                <!-- Input de Contraseña -->
+                <div class="relative">
+                    <input
+                        type="password"
+                        v-model="user.password"
+                        autocomplete="password"
+                        class="peer py-3 px-4 ps-11 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                        placeholder="Ingresá tu contraseña"
+                    />
+                    <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none ps-4">
+                        <svg class="shrink-0 w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path d="M2 18v3c0 .6.4 1 1 1h4v-3h3v-3h2l1.4-1.4a6.5 6.5 0 1 0-4-4Z"></path>
+                            <circle cx="16.5" cy="7.5" r=".5"></circle>
+                        </svg>
                     </div>
                 </div>
 
@@ -61,11 +82,8 @@ async function handleSubmit() {
                 </div>
             </form>
 
-            <!-- Enlace a la página de registro -->
-            <div class="mt-6 text-center">
-                <router-link to="/registrarse" class="text-indigo-600 hover:text-indigo-500">
-                    ¿No tienes una cuenta? Regístrate aquí
-                </router-link>
+            <div class="mt-4 text-center">
+                <router-link to="/registrarse" class="text-[#166534] hover:underline">¿No tenés cuenta? Regístrate acá</router-link>
             </div>
         </div>
     </div>

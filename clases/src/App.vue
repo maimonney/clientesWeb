@@ -1,35 +1,44 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import NavSuperior from './components/NavSuperior.vue';
-import MiPerfil from './pages/MiPerfil.vue';
-import { getAuth } from 'firebase/auth';
+import NavLateral from './components/NavLateral.vue';
+import { subscribeToAuthChanges } from './services/auth'; 
+import { useRouter } from 'vue-router';
 
-const auth = getAuth();
-const isLoggedIn = ref(false);
-
-// Verifica si el usuario está autenticado al montar el componente
-const checkUserStatus = () => {
-  isLoggedIn.value = !!auth.currentUser; // true si hay un usuario autenticado
-};
+const loggedUser = ref({
+    id: null,
+    email: null,
+    displayName: null,
+});
+const router = useRouter();
 
 onMounted(() => {
-  checkUserStatus(); // Llama a la función al montar el componente
+    subscribeToAuthChanges(newUserData => {
+        loggedUser.value = newUserData;
+    });
 });
 </script>
 
 <template>
-  <NavSuperior />
-  <main class="p-4">
-    <router-view />
-  </main>
+  <div class="relative">
+    <!-- Menú de navegación para login y registro -->
+    <nav v-if="!loggedUser.id" class="flex justify-center items-center backdrop-blur-sm bg-white/70 border border-gray-300 rounded-lg shadow-lg p-4 mx-6 my-4 absolute top-0 left-0 right-0 z-10">
+      <div class="space-x-4">
+        <router-link to="/iniciar-sesion" class="text-[#166534] hover:underline">Iniciar Sesión</router-link>
+        <router-link to="/registrarse" class="text-[#166534] hover:underline">Registrarse</router-link>
+      </div>
+    </nav>
 
-  <!-- Muestra el perfil si el usuario está autenticado -->
-  <div v-if="isLoggedIn">
-    <MiPerfil />
+    <!-- Si el usuario no está logueado, mostramos el formulario de login o registro -->
+    <div v-if="!loggedUser.id">
+      <router-view />
+    </div>
+
+    <!-- Si el usuario está logueado, mostramos el nav lateral y el contenido de las rutas -->
+    <div v-else class="flex">
+      <NavLateral :loggedUser="loggedUser" />
+      <div class="flex-1 p-6">
+        <router-view />
+      </div>
+    </div>
   </div>
-  
-  <!-- Muestra el footer con el logo si el usuario no está autenticado -->
-  <footer v-else class="bg-violet-300 p-4 text-center">
-    <img src="/img/logo_viaje.png" alt="Logo Viaje" class="h-24 w-auto mx-auto" /> <!-- Aumentar el tamaño del logo -->
-  </footer>
 </template>

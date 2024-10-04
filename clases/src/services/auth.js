@@ -75,13 +75,3 @@ function notifyAll() {
     observers.forEach(callback => notify(callback));
 }
 
-export async function registroUser({ email, password }) {
-    try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        console.log("Usuario registrado con éxito: ", userCredential.user);
-        return userCredential.user; 
-    } catch (error) {
-        console.error("[auth.js registro] Error al registrar el usuario: ", error);
-        throw error;
-    }
-}

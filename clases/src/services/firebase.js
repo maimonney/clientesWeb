@@ -20,6 +20,6 @@ export const auth = getAuth(app);
 
 
 
-const userId = auth.currentUser?.uid; // Obtén el ID del usuario autenticado
+const userId = auth.currentUser?.uid; 
 
 

@@ -5,6 +5,7 @@ import { getUserProfileById } from '../services/userPerfil';
 import { getPublicacionesByUserId } from '../services/postUser'; 
 import { getAuth } from 'firebase/auth';
 import IconEdit from '../components/icons/IconEdit.vue';
+import ToBack from '../components/ToBack.vue';
 
 const loggedUser = ref({
     id: null,
@@ -12,7 +13,7 @@ const loggedUser = ref({
     displayName: null,
     bio: null,
     career: null,
-    publicaciones: [], // Agregado para almacenar las publicaciones del usuario
+    publicaciones: [], 
 });
 
 const auth = getAuth();
@@ -35,13 +36,13 @@ const loadUserProfile = async () => {
     try {
         const profile = await getUserProfileById(userId); 
         loggedUser.value = profile; 
-        await loadUserPublications(); // Carga las publicaciones después de cargar el perfil
+        await loadUserPublications(); 
     } catch (error) {
         console.error('[MiPerfil] Error al obtener el perfil del usuario:', error);
     }
 };
 
-// Función para cargar las publicaciones del usuario
+
 const loadUserPublications = async () => {
     const user = auth.currentUser; 
 
@@ -59,7 +60,7 @@ const loadUserPublications = async () => {
     }
 };
 
-// Función para formatear la fecha
+
 const formatDate = (timestamp) => {
     if (!timestamp) return '';
     const date = new Date(timestamp.seconds * 1000);
@@ -68,9 +69,15 @@ const formatDate = (timestamp) => {
 </script>
 
 <template>
-    <div class="max-w-4xl mx-auto py-8 px-4">
+   <ToBack />
+   <div class="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
         <div class="flex items-center justify-between mb-6">
-            <BaseHeading1>Mi Perfil</BaseHeading1>
+            <div class="flex items-center">
+                <img class="inline-block w-[46px] h-[46px] rounded-full mr-2" 
+                     src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80" 
+                     alt="Avatar">
+                <BaseHeading1 >   Mi Perfil</BaseHeading1>
+            </div>
             <RouterLink 
               to="/mi-perfil/editar" 
               class="text-indigo-600 hover:text-indigo-800 font-semibold">
