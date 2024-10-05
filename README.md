@@ -1,16 +1,34 @@
-# Clonar el repositor 
+# Primer parcial
 
-1. Clono el repositorio
-    - git clone https://github.com/maimonney/clientesWeb.git
+## Alumnas:
+```
+    - Ayala Daiana
+    - Monney Mailen
+```
 
-2. Configuro el usuario & email
-    - git config user.name "dayayalaa"
-    - git config user.mail "day1414@hotmail.com"
+- Carrera: Diseño y programación web
+- Materia: Clientes web
+- Año: 2024
+- Comison: DWM4AP
+- Docente: Santiago Gallino
 
-3. Agrego los archivos, comento y realizo push
-    - git add .
-    - git commit -m "Agregar comentario"
-    -git push 
+```
+---Perfiles----
+User 1:
+day1414@hotmail.com
 
-4. Para obtener los últimos cambios del repositorio
-    - git pull
+Contraseña:
+hola123
+
+User 2:
+mailen.monney@davinci.edu.ar
+
+Contraseña:
+mai123
+
+User 3:
+matti@gmail.com
+
+Contraseña:
+matti123
+```
