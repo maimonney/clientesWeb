@@ -22,7 +22,6 @@ onMounted(async () => {
     await loadUserProfile();
 });
 
-// Función para cargar el perfil de usuario
 const loadUserProfile = async () => {
     const user = auth.currentUser; 
 
@@ -61,7 +60,7 @@ const loadUserPublications = async () => {
     const userId = user.uid;
 
     try {
-        loggedUser.value.publicaciones = await getPublicacionesByUserId(userId); // Cargar publicaciones
+        loggedUser.value.publicaciones = await getPublicacionesByUserId(userId); 
     } catch (error) {
         console.error('[MiPerfil] Error al obtener las publicaciones del usuario:', error);
     }

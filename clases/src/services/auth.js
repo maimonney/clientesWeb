@@ -1,7 +1,7 @@
-import { doc, setDoc } from "firebase/firestore"; // Asegúrate de incluir esta línea
+import { doc, setDoc } from "firebase/firestore"; 
 import { signInWithEmailAndPassword, updateProfile, signOut, createUserWithEmailAndPassword } from "firebase/auth";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth, db } from "./firebase"; // Asegúrate de importar correctamente tu configuración de Firebase
+import { auth, db } from "./firebase"; 
 import { getUserProfileById, updateUserProfile } from "./userPerfil";
 
 let loggedUser = {
@@ -15,7 +15,6 @@ let loggedUser = {
 
 let observers = [];
 
-// Observa cambios en la autenticación
 onAuthStateChanged(auth, async user => {
     if (user) {
         loggedUser = {
@@ -121,18 +120,15 @@ export async function logout() {
     await signOut(auth);
 }
 
-// Función para suscribirse a los cambios en la autenticación
 export function subscribeToAuthChanges(callback) {
     observers.push(callback);
     notify(callback);
 }
 
-// Función para notificar cambios a un solo observador
 function notify(callback) {
     callback({ ...loggedUser });
 }
 
-// Función para notificar a todos los observadores
 function notifyAll() {
     observers.forEach(callback => notify(callback));
 }

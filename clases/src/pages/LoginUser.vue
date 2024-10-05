@@ -30,7 +30,6 @@ const iconColor = ref('#115e59');
 </script>
 
 <template>
-    <!-- Contenedor principal con la imagen de fondo -->
     <div class="flex h-screen justify-center items-center px-6 py-12 lg:px-8 bg-[url('/img/fondoLogin.jpg')] bg-cover bg-center">
         <div class="backdrop-blur-sm bg-white/70 border border-gray-300 rounded-lg shadow-lg p-6 w-full max-w-sm">
             <div class="text-center mb-6 flex flex-col items-center">
@@ -44,7 +43,7 @@ const iconColor = ref('#115e59');
                     {{ errorMessage }}
                 </div>
 
-                <!-- Input de Email -->
+                <!-- Email -->
                 <div class="max-w-sm space-y-3">
                     <div class="relative">
                         <input
@@ -63,7 +62,7 @@ const iconColor = ref('#115e59');
                     </div>
                 </div>
 
-                <!-- Input de Contraseña -->
+                <!-- Contraseña -->
                 <div class="relative">
                     <input
                         type="password"
